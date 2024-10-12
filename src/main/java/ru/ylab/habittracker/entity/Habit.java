@@ -25,4 +25,8 @@ public class Habit {
         long currentTime = System.currentTimeMillis();
         timestamps.add(currentTime);
     }
+
+    public void addTimestamp(long timestamp) {
+        timestamps.add(timestamp);
+    }
 }

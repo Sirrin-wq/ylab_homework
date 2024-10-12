@@ -79,6 +79,4 @@ public class HabitRepositoryImpl implements HabitRepository {
 
         userHabits.remove(email);
     }
-
-
 }

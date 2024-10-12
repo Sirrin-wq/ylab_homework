@@ -51,7 +51,7 @@ public class HabitTrackerDisplay {
         }
     }
 
-    private void registerUser(Scanner scanner) {
+    public void registerUser(Scanner scanner) {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
         System.out.print("Enter email: ");
@@ -67,7 +67,7 @@ public class HabitTrackerDisplay {
         }
     }
 
-    private void loginUser(Scanner scanner) {
+    public void loginUser(Scanner scanner) {
         System.out.print("Enter email: ");
         String email = scanner.nextLine();
         System.out.print("Enter password: ");
@@ -122,7 +122,7 @@ public class HabitTrackerDisplay {
         }
     }
 
-    private void addHabit(Scanner scanner) {
+    public void addHabit(Scanner scanner) {
         System.out.print("Enter habit name: ");
         String name = scanner.nextLine();
         System.out.print("Enter habit description: ");
@@ -159,7 +159,7 @@ public class HabitTrackerDisplay {
         System.out.println("Habit added successfully!");
     }
 
-    private void viewHabits() {
+    public void viewHabits() {
         List<Habit> habits = habitService.getUserHabits(UserSecurityManager.currentUser.getEmail());
         System.out.println("Your Habits:");
         for (int i = 0; i < habits.size(); i++) {
@@ -169,7 +169,7 @@ public class HabitTrackerDisplay {
         }
     }
 
-    private void updateHabit(Scanner scanner) {
+    public void updateHabit(Scanner scanner) {
         System.out.print("Enter the name of the habit to update: ");
         String habitName = scanner.nextLine();
         Habit existingHabit = habitService.getHabitByUserEmail(UserSecurityManager.currentUser.getEmail(), habitName);
@@ -185,14 +185,14 @@ public class HabitTrackerDisplay {
         System.out.println("Habit updated successfully!");
     }
 
-    private void deleteHabit(Scanner scanner) {
+    public void deleteHabit(Scanner scanner) {
         System.out.print("Enter the name of the habit to delete: ");
         String habitName = scanner.nextLine();
         habitService.deleteHabit(UserSecurityManager.currentUser.getEmail(), habitName);
         System.out.println("Habit deleted successfully!");
     }
 
-    private void viewHabitStatistics(Scanner scanner) {
+    public void viewHabitStatistics(Scanner scanner) {
         System.out.print("Enter habit name: ");
         String habitName = scanner.nextLine();
 
