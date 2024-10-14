@@ -133,7 +133,7 @@ public class HabitTrackerDisplay {
         do {
             System.out.println("Enter habit frequency: ");
             System.out.println("1. Daily");
-            System.out.println("3. Weekly");
+            System.out.println("2. Weekly");
             System.out.println("3. Monthly");
             choice = scanner.nextInt();
             scanner.nextLine();
