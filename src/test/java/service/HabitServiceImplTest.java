@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.ylab.habittracker.entity.Habit;
+import ru.ylab.habittracker.exceptions.HabitNotFoundException;
 import ru.ylab.habittracker.repository.HabitRepository;
 import ru.ylab.habittracker.service.impl.HabitServiceImpl;
 
@@ -75,7 +76,7 @@ class HabitServiceImplTest {
 
     @Test
     @DisplayName("Should delete an existing habit successfully")
-    void testDeleteHabit() {
+    void testDeleteHabit() throws HabitNotFoundException {
         String userEmail = "user@example.com";
         Habit existingHabit = new Habit("Exercise", "Daily workout", "Daily");
 
@@ -87,7 +88,7 @@ class HabitServiceImplTest {
 
     @Test
     @DisplayName("Should delete all habits for a user successfully")
-    void testDeleteAllUserHabits() {
+    void testDeleteAllUserHabits() throws HabitNotFoundException {
         String userEmail = "user@example.com";
 
         habitService.deleteAllUserHabits(userEmail);
@@ -96,7 +97,7 @@ class HabitServiceImplTest {
 
     @Test
     @DisplayName("Should add a timestamp when marking an existing habit as completed")
-    void testMarkHabitCompleted() {
+    void testMarkHabitCompleted() throws HabitNotFoundException {
         String userEmail = "user@example.com";
         Habit existingHabit = new Habit("Exercise", "Daily workout", "Daily");
 
@@ -114,7 +115,7 @@ class HabitServiceImplTest {
 
     @Test
     @DisplayName("Should retrieve habit statistics within a time range")
-    void testGetHabitStatistics() {
+    void testGetHabitStatistics() throws HabitNotFoundException {
         String userEmail = "user@example.com";
         String habitName = "Exercise";
         long startTime = 1000L;

@@ -2,6 +2,7 @@ package ru.ylab.habittracker.repository.impl;
 
 import lombok.RequiredArgsConstructor;
 import ru.ylab.habittracker.entity.User;
+import ru.ylab.habittracker.exceptions.HabitNotFoundException;
 import ru.ylab.habittracker.exceptions.UserAlreadyExistsException;
 import ru.ylab.habittracker.exceptions.UserNotFoundException;
 import ru.ylab.habittracker.repository.HabitRepository;
@@ -42,7 +43,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public void deleteByEmail(String email) throws UserNotFoundException {
+    public void deleteByEmail(String email) throws UserNotFoundException, HabitNotFoundException {
         if (users.containsKey(email)) {
             habitRepository.deleteAllUserHabits(email);
             users.remove(email);

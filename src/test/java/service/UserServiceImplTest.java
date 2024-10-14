@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.ylab.habittracker.entity.User;
+import ru.ylab.habittracker.exceptions.UserAlreadyExistsException;
+import ru.ylab.habittracker.exceptions.UserNotFoundException;
 import ru.ylab.habittracker.repository.UserRepository;
 import ru.ylab.habittracker.service.impl.UserServiceImpl;
 
@@ -39,7 +41,7 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("Should retrieve a user by email successfully")
-    void testGetUserByEmail() {
+    void testGetUserByEmail() throws UserNotFoundException {
         String email = "user@example.com";
         User user = new User("User Name", email, "password");
 
@@ -51,7 +53,7 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("Should add a new user successfully")
-    void testAddUser() {
+    void testAddUser() throws UserAlreadyExistsException {
         String email = "newuser@example.com";
         String password = "newpassword";
         String name = "New User";
@@ -66,7 +68,7 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("Should update an existing user successfully")
-    void testUpdateUser() {
+    void testUpdateUser() throws UserNotFoundException {
         String email = "user@example.com";
         User existingUser = new User(email, "oldpassword", "Old Name");
 
@@ -82,7 +84,7 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("Should delete a user successfully")
-    void testDeleteUser() {
+    void testDeleteUser() throws UserNotFoundException {
         String email = "user@example.com";
 
         userService.deleteUser(email);
@@ -91,7 +93,7 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("Should reset a user's password successfully")
-    void testResetPassword() {
+    void testResetPassword() throws UserNotFoundException {
         String email = "user@example.com";
         User existingUser = new User(email, "oldpassword", "User Name");
 

@@ -1,6 +1,7 @@
 package ru.ylab.habittracker.repository;
 
 import ru.ylab.habittracker.entity.User;
+import ru.ylab.habittracker.exceptions.HabitNotFoundException;
 import ru.ylab.habittracker.exceptions.UserAlreadyExistsException;
 import ru.ylab.habittracker.exceptions.UserNotFoundException;
 
@@ -13,5 +14,5 @@ public interface UserRepository {
 
     void save(User user) throws UserAlreadyExistsException;
 
-    void deleteByEmail(String email) throws UserNotFoundException;
+    void deleteByEmail(String email) throws UserNotFoundException, HabitNotFoundException;
 }

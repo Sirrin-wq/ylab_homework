@@ -2,6 +2,7 @@ package ru.ylab.habittracker.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import ru.ylab.habittracker.entity.User;
+import ru.ylab.habittracker.exceptions.HabitNotFoundException;
 import ru.ylab.habittracker.exceptions.UserAlreadyExistsException;
 import ru.ylab.habittracker.exceptions.UserNotFoundException;
 import ru.ylab.habittracker.repository.UserRepository;
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String email) {
         try {
             userRepository.deleteByEmail(email);
-        } catch (UserNotFoundException exception){
+        } catch (UserNotFoundException | HabitNotFoundException exception){
             System.out.println(exception.getMessage());
         }
     }

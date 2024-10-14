@@ -82,7 +82,7 @@ public class HabitServiceImpl implements HabitService {
         Habit existingHabit = null;
         try {
             existingHabit = habitRepository.findHabitByUserEmail(userEmail, habitName);
-        } catch (HabitNotFoundException exception){
+        } catch (HabitNotFoundException exception) {
             System.out.println(exception.getMessage());
         }
         return existingHabit.getTimestamps().stream()
