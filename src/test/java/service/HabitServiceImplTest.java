@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.ylab.habittracker.entity.Habit;
+import ru.ylab.habittracker.exceptions.HabitAlreadyExistsException;
 import ru.ylab.habittracker.exceptions.HabitNotFoundException;
 import ru.ylab.habittracker.repository.HabitRepository;
 import ru.ylab.habittracker.service.impl.HabitServiceImpl;
@@ -41,7 +42,7 @@ class HabitServiceImplTest {
 
     @Test
     @DisplayName("Should retrieve a specific habit by user email")
-    void testGetHabitByUserEmail() {
+    void testGetHabitByUserEmail() throws HabitNotFoundException {
         String userEmail = "user@example.com";
         Habit habit = new Habit("Exercise", "Daily workout", "Daily");
 
@@ -53,7 +54,7 @@ class HabitServiceImplTest {
 
     @Test
     @DisplayName("Should add a new habit successfully")
-    void testAddHabit() {
+    void testAddHabit() throws HabitAlreadyExistsException {
         String userEmail = "user@example.com";
         Habit habit = new Habit("Exercise", "Daily workout", "Daily");
 
@@ -63,7 +64,7 @@ class HabitServiceImplTest {
 
     @Test
     @DisplayName("Should update an existing habit successfully")
-    void testUpdateHabit() {
+    void testUpdateHabit() throws HabitNotFoundException {
         String userEmail = "user@example.com";
         Habit existingHabit = new Habit("Exercise", "Daily workout", "Daily");
         Habit updatedHabit = new Habit("Exercise", "Updated description", "Daily");
