@@ -1,5 +1,6 @@
 package ru.ylab.habittracker.repository.impl;
 
+import lombok.RequiredArgsConstructor;
 import ru.ylab.habittracker.entity.User;
 import ru.ylab.habittracker.repository.HabitRepository;
 import ru.ylab.habittracker.repository.UserRepository;
@@ -9,14 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
     private final HabitRepository habitRepository;
     private final Map<String, User> users = new HashMap<>();
-
-    public UserRepositoryImpl(HabitRepository habitRepository) {
-        this.habitRepository = habitRepository;
-    }
 
     @Override
     public List<User> findAll() {

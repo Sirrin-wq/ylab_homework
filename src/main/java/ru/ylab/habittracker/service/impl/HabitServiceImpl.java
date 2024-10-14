@@ -30,19 +30,11 @@ public class HabitServiceImpl implements HabitService {
 
     @Override
     public void updateHabit(String userEmail, Habit habit) {
-        Habit existingHabit = habitRepository.findHabitByUserEmail(userEmail, habit.getName());
-        if (existingHabit == null) {
-            throw new IllegalArgumentException("Habit not found: " + habit.getName());
-        }
         habitRepository.updateHabit(userEmail, habit);
     }
 
     @Override
     public void deleteHabit(String userEmail, String habitName) {
-        Habit existingHabit = habitRepository.findHabitByUserEmail(userEmail, habitName);
-        if (existingHabit == null) {
-            throw new IllegalArgumentException("Habit not found: " + habitName);
-        }
         habitRepository.deleteHabit(userEmail, habitName);
     }
 

@@ -74,20 +74,6 @@ class HabitServiceImplTest {
     }
 
     @Test
-    @DisplayName("Should throw exception when updating a non-existent habit")
-    void testUpdateHabitNotFound() {
-        String userEmail = "user@example.com";
-        Habit updatedHabit = new Habit("Exercise", "Updated description", "Daily");
-
-        Mockito.when(habitRepository.findHabitByUserEmail(userEmail, "Exercise")).thenReturn(null);
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            habitService.updateHabit(userEmail, updatedHabit);
-        });
-        assertEquals("Habit not found: Exercise", exception.getMessage());
-    }
-
-    @Test
     @DisplayName("Should delete an existing habit successfully")
     void testDeleteHabit() {
         String userEmail = "user@example.com";
@@ -97,19 +83,6 @@ class HabitServiceImplTest {
 
         habitService.deleteHabit(userEmail, "Exercise");
         Mockito.verify(habitRepository).deleteHabit(userEmail, "Exercise");
-    }
-
-    @Test
-    @DisplayName("Should throw exception when deleting a non-existent habit")
-    void testDeleteHabitNotFound() {
-        String userEmail = "user@example.com";
-
-        Mockito.when(habitRepository.findHabitByUserEmail(userEmail, "Exercise")).thenReturn(null);
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            habitService.deleteHabit(userEmail, "Exercise");
-        });
-        assertEquals("Habit not found: Exercise", exception.getMessage());
     }
 
     @Test
