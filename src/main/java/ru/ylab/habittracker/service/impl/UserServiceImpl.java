@@ -2,6 +2,8 @@ package ru.ylab.habittracker.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import ru.ylab.habittracker.entity.User;
+import ru.ylab.habittracker.exceptions.UserAlreadyExistsException;
+import ru.ylab.habittracker.exceptions.UserNotFoundException;
 import ru.ylab.habittracker.repository.UserRepository;
 import ru.ylab.habittracker.service.UserService;
 
@@ -18,30 +20,55 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByEmail(String email) {
-        return userRepository.findByEmail(email);
+        User user = null;
+        try {
+            user = userRepository.findByEmail(email);
+        } catch (UserNotFoundException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return user;
     }
 
     @Override
     public void addUser(String email, String password, String name) {
         User newUser = new User(email, password, name);
-        userRepository.save(newUser);
+        try {
+            userRepository.save(newUser);
+        } catch (UserAlreadyExistsException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
     @Override
     public void updateUser(String email, String newName, String newPassword) {
-        User user = userRepository.findByEmail(email);
-        user.setName(newName);
-        user.setPassword(newPassword);
+        User user = null;
+        try {
+            user = userRepository.findByEmail(email);
+            user.setName(newName);
+            user.setPassword(newPassword);
+        } catch (UserNotFoundException exception) {
+            System.out.println(exception.getMessage());
+        }
+
     }
 
     @Override
     public void deleteUser(String email) {
-        userRepository.deleteByEmail(email);
+        try {
+            userRepository.deleteByEmail(email);
+        } catch (UserNotFoundException exception){
+            System.out.println(exception.getMessage());
+        }
     }
 
     @Override
     public void resetPassword(String email, String newPassword) {
-        User user = userRepository.findByEmail(email);
-        user.setPassword(newPassword);
+        try {
+            User user = userRepository.findByEmail(email);
+            user.setPassword(newPassword);
+        } catch (UserNotFoundException exception){
+            System.out.println(exception.getMessage());
+        }
+
     }
 }
